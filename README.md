@@ -1,9 +1,12 @@
 # Projeto Full-Stack (Back-end + Front-end)
 #Todo-list
-image.png 
+<img width="1895" height="905" alt="image" src="https://github.com/user-attachments/assets/57c07113-f583-430d-893a-b50811f1dc06" />
+
 
 #Controle financeiro 
-image.png
+
+<img width="1909" height="915" alt="image" src="https://github.com/user-attachments/assets/7150aede-7fdd-47ff-9aff-3152914e6bb2" />
+
 
 Este projeto implementa um **sistema de bloco de notas** com:
 
