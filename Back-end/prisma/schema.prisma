@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum Importance {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum Recurrence {
+  NONE
+  MONTHLY
+  YEARLY
+}
+
+enum BillPaymentStatus {
+  PENDING
+  PAID
+  PARTIAL
+  OVERDUE
+}
+
+model Note {
+  id          Int        @id @default(autoincrement())
+  title       String
+  importance  Importance @default(MEDIUM)
+  content     String
+  tags        String     @default("")
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([importance])
+  @@index([updatedAt])
+}
+
+model PasswordEntry {
+  id        Int      @id @default(autoincrement())
+  title     String
+  username  String   @default("")
+  password  String
+  url       String   @default("")
+  notes     String   @default("")
+  tags      String   @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([updatedAt])
+}
+
+model TodoCategory {
+  id        Int        @id @default(autoincrement())
+  name      String
+  color     String    @default("#22d3ee")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  items TodoItem[]
+}
+
+model TodoItem {
+  id         Int             @id @default(autoincrement())
+  categoryId Int
+  text       String
+  done       Boolean         @default(false)
+  dueDate    DateTime?
+  createdAt  DateTime        @default(now())
+  updatedAt  DateTime        @updatedAt
+
+  category TodoCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@index([categoryId])
+  @@index([done])
+}
+
+model Bill {
+  id                Int               @id @default(autoincrement())
+  title             String
+  amount            Float
+  currency          String            @default("BRL")
+  dueDate           DateTime
+  nextDueDate       DateTime?
+  recurrence        Recurrence        @default(NONE)
+  lastPaidAt        DateTime?
+  installmentCount  Int?
+  paymentStatus     BillPaymentStatus @default(PENDING)
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+
+  @@index([recurrence])
+  @@index([nextDueDate])
+  @@index([paymentStatus])
+}
+

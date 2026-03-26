@@ -1,0 +1,29 @@
+# Dependências
+node_modules/
+
+# Build
+dist/
+*.tsbuildinfo
+
+# Ambiente (nunca commitar segredos)
+.env
+.env.*
+!.env.example
+
+# SQLite local — não enviar banco de dados real para o Git
+**/dev.db
+**/dev.db-journal
+*.db
+
+# Logs e SO
+*.log
+.DS_Store
+Thumbs.db
+
+# IDE / Cursor
+.idea/
+.vscode/
+*.swp
+.cursor/
+
+# Prisma (opcional: manter migrations versionadas — não ignorar prisma/migrations)
